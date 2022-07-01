@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import Counter from "./components/Counter";
 
-function App2(){
+function App3(){
     const [buttonName, setButtonName] = useState('클릭');
     function clickButton(){
         setButtonName('Click');
@@ -17,4 +17,4 @@ function App2(){
     );
 }
 
-export default App2;
+export default App3;
