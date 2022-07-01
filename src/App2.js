@@ -5,11 +5,16 @@ function App2(){
     const [seaniee,setSeanie]   = useState(0);
     useEffect(()=>{
         console.log(count);
-    },[count])
+    },[count,seaniee])
 
+    useEffect(()=>{
+        console.log('first rendering')      
+    },[]);
+    
     function increment() {
         setCount(count+1);
     }
+
     return(
         <div className="App">
             <h1>Seannie Coder</h1>
