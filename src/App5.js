@@ -1,53 +1,38 @@
 import React, { useState } from "react";
 import Movie from './components/Movie';
+import MovieForm from "./components/MovieForm";
 
 function App5(){
     
-    
-    const[movieTitle,setMovieTitle] = useState('');
-    const[movieYear,setMovieYear] = useState('');
-    const [movies, setMovies] = useState([
-        { title : 'kossie coder1', year: 2001},
-        { title : 'kossie coder2', year: 2002},
-        { title : 'kossie coder3', year: 2003},
-        { title : 'kossie coder4', year: 2004},
-        
-    ]);
+    const [movies, setMovies] = useState([]);
 
+    const removeMovie=(id)=>{
+        setMovies(movies.filter(movie=>{
+            return movie.id !==id;
 
-    const renderMovies = movies.map(movie =>{
+        }));
+
+    };
+
+    const renderMovies = movies.length ? movies.map(movie =>{
         return(
-            <Movie movie= {movie} key = {movie.title}></Movie>
+            <Movie movie= {movie} 
+                    key = {movie.id}
+                    removeMovie = {removeMovie}></Movie>
         );
-    });
+    }) : '추가된 영화가 없습니다';
 
-    const addMovie = (event) =>{
-        event.preventDefault();
-        setMovies([...movies,{
-            title: movieTitle,
-            year: movieYear,
-        }]);
-        setMovieTitle('');
-        setMovieYear('');
-
+    const addMovie = (movie) =>{
+        setMovies([
+            ...movies,movie
+        ]);
+ 
     };
 
     return(
         <div className="App">
             <h1>Movie list</h1>
-            <form onSubmit={addMovie}>
-                <input type = 'text'
-                value={movieTitle}
-                placeholder = '영화제목'
-                onChange={e=>setMovieTitle(e.target.value)}></input>
-                <br/>
-                <input type = 'text'
-                value={movieYear}
-                placeholder = '개봉년도'
-                onChange={e=>setMovieYear(e.target.value)}></input>
-                <br/>
-                <button type = "submit">영화추가</button>
-            </form>
+            <MovieForm addMovie={addMovie}></MovieForm>
             {renderMovies}
 
         </div>
